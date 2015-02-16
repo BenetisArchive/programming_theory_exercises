@@ -22,16 +22,24 @@ cases = getInput()
 import re
 
 def isCaseCorrect(caseString):
-    tagsStack = []
+    def isTagCorrect(tag):
+        insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
+        if insideTag:
+            return True
+        else:
+            return False
+
+    def isTagsOrderValid(tagList):
+        print(tagList)
+        isTagOpen = lambda x: False if (x[1] == '/') else True
+                
+        return True
+
     tagIterator = re.finditer('\<\/?.*?\>', caseString)
     tagList = list(map(lambda x: x.group(), tagIterator))
-    return tagList == filter(isTagCorrect, tagList)
+    areTagsValid = tagList == filter(isTagCorrect, tagList)
+    # todo: We can cut here if tags are not valid
+    # return areTagsValid and isTagsOrderValid(tagList)
+    return isTagsOrderValid(tagList)
 
-def isTagCorrect(tag):
-    insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
-    if insideTag:
-        return True
-    else:
-        return False
-
-print(isCaseCorrect('<html>testas</html>'))
+print(isCaseCorrect('<html>testas</html><>'))
