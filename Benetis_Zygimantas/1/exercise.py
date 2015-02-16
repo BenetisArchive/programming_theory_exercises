@@ -30,16 +30,31 @@ def isCaseCorrect(caseString):
             return False
 
     def isTagsOrderValid(tagList):
-        print(tagList)
-        isTagOpen = lambda x: False if (x[1] == '/') else True
-                
+        def isOpenTag(tag):
+            if tag[1] == '/':
+                return False
+            else:
+                return True
+        def makeOpenTag(tag):
+            return tag.replace('/', '')
+        #imperative solution
+        tagStack = []
+        for itTag in tagList:
+            if isOpenTag(itTag):
+                tagStack.append(itTag)
+            else:
+                if not tagStack:
+                    return False
+                removedTag = tagStack.pop()
+                print(makeOpenTag(removedTag))
+                if removedTag != makeOpenTag(itTag):
+                    return False
         return True
 
     tagIterator = re.finditer('\<\/?.*?\>', caseString)
     tagList = list(map(lambda x: x.group(), tagIterator))
     areTagsValid = tagList == filter(isTagCorrect, tagList)
-    # todo: We can cut here if tags are not valid
-    # return areTagsValid and isTagsOrderValid(tagList)
-    return isTagsOrderValid(tagList)
+    return areTagsValid and isTagsOrderValid(tagList)
 
-print(isCaseCorrect('<html>testas</html><>'))
+print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
+print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
