@@ -20,6 +20,7 @@ def getInput():
 
 def problemSolution(cases):
     import re
+    caseError = ''
 
     def isCaseCorrect(caseString):
         def isTagCorrect(tag):
@@ -27,6 +28,7 @@ def problemSolution(cases):
             if insideTag:
                 return True
             else:
+                problemSolution.caseError = 'Tag ' + tag + ' is incorrect'
                 return False
 
         def isTagsOrderValid(tagList):
@@ -37,19 +39,21 @@ def problemSolution(cases):
                     return True
             def makeOpenTag(tag):
                 return tag.replace('/', '')
-            #imperative solution
             tagStack = []
             for itTag in tagList:
                 if isOpenTag(itTag):
                     tagStack.append(itTag)
                 else:
                     if not tagStack:
+                        problemSolution.caseError = 'No opening tag of '+ itTag
                         return False
                     removedTag = tagStack.pop()
                     if removedTag != makeOpenTag(itTag):
+                        problemSolution.caseError = 'Expected ending tag of '+removedTag
                         return False
             return True
 
+        problemSolution.caseError = ''
         tagIterator = re.finditer('\<\/?.*?\>', caseString)
         tagList = list(map(lambda x: x.group(), tagIterator))
         areTagsValid = tagList == filter(isTagCorrect, tagList)
@@ -57,10 +61,10 @@ def problemSolution(cases):
 
     def checkCases(casesToCheck):
         solution = map(lambda (i,x): "Case #{} : Correct".format(i+1) \
-            if isCaseCorrect(x) else "Case #{} : Incorrect".format(i+1),\
+            if isCaseCorrect(x) else "Case #{} : Incorrect. Error: ".format(i+1)+problemSolution.caseError,\
             enumerate(casesToCheck))
 
-        print(solution)
+        print('\n'.join(solution))
 
     checkCases(cases)
 
