@@ -55,12 +55,11 @@ def problemSolution(cases):
         areTagsValid = tagList == filter(isTagCorrect, tagList)
         return areTagsValid and isTagsOrderValid(tagList)
 
-        print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
-        print(isCaseCorrect('Mismatch <START> </STOP>'))
-        print(isCaseCorrect('This one is okay <IN> </IN>'))
-
     def checkCases(casesToCheck):
-        solution = map(lambda (i,x): "Case #{} : Correct".format(i+1) if isCaseCorrect(x) else "Incorrect", enumerate(casesToCheck))
+        solution = map(lambda (i,x): "Case #{} : Correct".format(i+1) \
+            if isCaseCorrect(x) else "Case #{} : Incorrect".format(i+1),\
+            enumerate(casesToCheck))
+
         print(solution)
 
     checkCases(cases)
