@@ -24,7 +24,8 @@ import re
 def isCaseCorrect(caseString):
     tagsStack = []
     tagIterator = re.finditer('\<\/?.*?\>', caseString)
-    print(tagIterator.next())
+    tagList = list(map(lambda x: x.group(), tagIterator))
+    print(tagList)
 
 def isTagCorrect(tag):
     insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
@@ -33,5 +34,4 @@ def isTagCorrect(tag):
     else:
         return False
 
-print(isTagCorrect('</html>'))
-isCaseCorrect('<html>testas</html>')
+isCaseCorrect('<html>testas</html><>')
