@@ -19,4 +19,22 @@ This one is okay <IN> </IN>
 Mismatch <START> </STOP>
 1
 Missing start symbol: <OK></OK></NOTOK> more garbage...
+17
+<nav id="app-switcher" class="aui-dropdown2 aui-style-default aui-dropdown2-disable-active-class">
+        <div class="aui-dropdown2-section blank-slate">
+          <h2>Connect Bitbucket with other great Atlassian products:</h2>
+          <dl>
+            <dt class="jira">JIRA</dt>
+            <dd>Project and issue tracking</dd>
+            <dt class="confluence">Confluence</dt>
+            <dd>Collaboration and content sharing</dd>
+            <dt class="bamboo">Bamboo</dt>
+            <dd>Continuous integration</dd>
+          </dl>
+          <a href="https://www.atlassian.com/ondemand/signup/?product=jira.ondemand,com.atlassian.bitbucket&utm_source=bitbucket&utm_medium=button&utm_campaign=app_switcher&utm_content=trial_button"
+             class="aui-button aui-button-primary" target="_blank" id="ondemand-trial">Free trial</a>
+          <a href="https://www.atlassian.com/software?utm_source=bitbucket&utm_medium=button&utm_campaign=app_switcher&utm_content=learn_more_button#cloud-products"
+             class="aui-button" target="_blank" id="ondemand-learn-more">Learn more</a>
+        </div>
+</nav>
 0
