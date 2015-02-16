@@ -18,43 +18,51 @@ def getInput():
 
     return groupLinesIntoCases(0, [])
 
-cases = getInput()
-import re
+def problemSolution(cases):
+    import re
 
-def isCaseCorrect(caseString):
-    def isTagCorrect(tag):
-        insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
-        if insideTag:
-            return True
-        else:
-            return False
-
-    def isTagsOrderValid(tagList):
-        def isOpenTag(tag):
-            if tag[1] == '/':
-                return False
-            else:
+    def isCaseCorrect(caseString):
+        def isTagCorrect(tag):
+            insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
+            if insideTag:
                 return True
-        def makeOpenTag(tag):
-            return tag.replace('/', '')
-        #imperative solution
-        tagStack = []
-        for itTag in tagList:
-            if isOpenTag(itTag):
-                tagStack.append(itTag)
             else:
-                if not tagStack:
-                    return False
-                removedTag = tagStack.pop()
-                print(makeOpenTag(removedTag))
-                if removedTag != makeOpenTag(itTag):
-                    return False
-        return True
+                return False
 
-    tagIterator = re.finditer('\<\/?.*?\>', caseString)
-    tagList = list(map(lambda x: x.group(), tagIterator))
-    areTagsValid = tagList == filter(isTagCorrect, tagList)
-    return areTagsValid and isTagsOrderValid(tagList)
+        def isTagsOrderValid(tagList):
+            def isOpenTag(tag):
+                if tag[1] == '/':
+                    return False
+                else:
+                    return True
+            def makeOpenTag(tag):
+                return tag.replace('/', '')
+            #imperative solution
+            tagStack = []
+            for itTag in tagList:
+                if isOpenTag(itTag):
+                    tagStack.append(itTag)
+                else:
+                    if not tagStack:
+                        return False
+                    removedTag = tagStack.pop()
+                    if removedTag != makeOpenTag(itTag):
+                        return False
+            return True
 
-print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
-print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
+        tagIterator = re.finditer('\<\/?.*?\>', caseString)
+        tagList = list(map(lambda x: x.group(), tagIterator))
+        areTagsValid = tagList == filter(isTagCorrect, tagList)
+        return areTagsValid and isTagsOrderValid(tagList)
+
+        print(isCaseCorrect('<tmo><html><body></body></html><test></test></test>'))
+        print(isCaseCorrect('Mismatch <START> </STOP>'))
+        print(isCaseCorrect('This one is okay <IN> </IN>'))
+
+    def checkCases(casesToCheck):
+        solution = map(lambda (i,x): "Case #{} : Correct".format(i+1) if isCaseCorrect(x) else "Incorrect", enumerate(casesToCheck))
+        print(solution)
+
+    checkCases(cases)
+
+problemSolution(getInput())

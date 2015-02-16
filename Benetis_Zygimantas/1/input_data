@@ -14,8 +14,6 @@ This has some good stuff <OKAY> and some bad stuff later on.
 This line will be skipped.
 As will this one.
 1
-This is an interesting error: <ERROR
-1
 This one is okay <IN> </IN>
 1
 Mismatch <START> </STOP>
