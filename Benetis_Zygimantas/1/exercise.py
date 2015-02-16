@@ -2,7 +2,7 @@ def list_append(lst, item):
     lst.append(item)
     return lst
 
-def input(): 
+def getInput():
     def readFile():
         f = open('input_data', 'r')
         return f.read().split('\n')
@@ -18,6 +18,20 @@ def input():
 
     return groupLinesIntoCases(0, [])
 
+cases = getInput()
+import re
 
-cases = input()
-print(cases)
+def isCaseCorrect(caseString):
+    tagsStack = []
+    tagIterator = re.finditer('\<\/?.*?\>', caseString)
+    print(tagIterator.next())
+
+def isTagCorrect(tag):
+    insideTag = re.search('\<\/?([a-zA-Z]{1,10}?)\>', tag)
+    if insideTag:
+        return True
+    else:
+        return False
+
+print(isTagCorrect('</html>'))
+isCaseCorrect('<html>testas</html>')
