@@ -68,4 +68,5 @@ def problemSolution(cases):
 
     checkCases(cases)
 
+    
 problemSolution(getInput())
