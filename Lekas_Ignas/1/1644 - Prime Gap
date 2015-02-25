@@ -1,13 +1,9 @@
 num_array=list()
-i= 0
 start=0
 end=0
-riba=0
 
 def ArPirminis(n):
-    i=0
-    for x in range(2, n/2+1):
-        i=i+1
+    for i in range(2, n/2+1):
         if (n%i==0):
             return False
     
@@ -28,7 +24,6 @@ def RastiRibas(n):
         if (ArPirminis(n=int(end))):
             break
     
-    print end-start
     return end-start
 
 
@@ -36,7 +31,8 @@ while True:
     n = raw_input("Iveskite norimus skaicius, baige iveskite 0:")
     if n.strip() != '0':
         num_array.append(RastiRibas(n=int(n)))
-        print num_array
-        
+              
     if n.strip() == '0':
         break
+        
+print num_array
